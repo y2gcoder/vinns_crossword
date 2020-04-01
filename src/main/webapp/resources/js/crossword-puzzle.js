@@ -291,8 +291,8 @@ function showCrossWordLists(wordlists, clues) {
 	var acrosslistorderedelement = getViewableCrossWordList(acrosslistordered, clues, true);
 	var downlistorderedelement = getViewableCrossWordList(downlistordered, clues, false);
 	
-	$('#left-list').append(acrosslistorderedelement);
-	$('#right-list').append(downlistorderedelement);
+	$('#left-list').html(acrosslistorderedelement);
+	$('#right-list').html(downlistorderedelement);
 }
 
 	/* getViewableCrossWordList(listitems, clues, across)
@@ -433,6 +433,10 @@ function getBlockItemNumberPosition(word, items) {
 function showCrossWordPuzzle(matrix) {
 	var widestline = getWidestLine(matrix);
 	var tallestline = getTallestLine(matrix);
+	// 원래 있던 퍼즐 삭제
+	if($(".puzzle").length > 0) {
+		$("#root").html("");
+	}
 	
 	var table = $('<table class="puzzle" border="1" cellpadding="0" cellspacing="0"></table>');
 	
@@ -1598,3 +1602,44 @@ function shuffle(array) {
 	
 	return array;
 }
+
+// 마우스 올렸을 시 
+$(".list-text").on("mouseenter", ".linkable", function(){
+	var word = $(this).closest(".word-clue").data("word");
+	var x = $(this).closest(".word-clue").data("x");
+	var y = $(this).closest(".word-clue").data("y");
+	var across = $(this).closest(".word-clue").data("across");
+	var wordlength = word.length;
+	
+	if(across) {
+		for(var i=y;i<(y+wordlength);i++){
+			$("#cell-position-"+x+"-"+i).addClass("selected-cell");
+		}
+	}else {
+		for(var i=x;i<(x+wordlength);i++){
+			$("#cell-position-"+i+"-"+y).addClass("selected-cell");
+		}
+	}
+	
+});
+//마우스가 벗어났을 시
+$(".list-text").on("mouseleave", ".linkable", function(){
+	var word = $(this).closest(".word-clue").data("word");
+	var x = $(this).closest(".word-clue").data("x");
+	var y = $(this).closest(".word-clue").data("y");
+	var across = $(this).closest(".word-clue").data("across");
+	var wordlength = word.length;
+	
+	if(across) {
+		for(var i=y;i<(y+wordlength);i++){
+			$("#cell-position-"+x+"-"+i).removeClass("selected-cell");
+		}
+	}else {
+		for(var i=x;i<(x+wordlength);i++){
+			$("#cell-position-"+i+"-"+y).removeClass("selected-cell");
+		}
+	}
+	
+});
+
+

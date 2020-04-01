@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.vinnsmedia.crossword.vo.CrosswordDTO;
 import com.vinnsmedia.crossword.vo.CrosswordVO;
+import com.vinnsmedia.crossword.vo.Word;
 import com.vinnsmedia.crossword.vo.WordDTO;
 
 public interface CrosswordService {
@@ -19,7 +20,11 @@ public interface CrosswordService {
 
 	// 해당 퍼즐 가져오기
 	CrosswordVO findPuzzleBySeq(Integer seq) throws Exception;
-
+	
+	// 퍼즐 되는지 확인
+	char[][] paintingPuzzle(List<Word> wordList);
+	
+	
 	
 
 }

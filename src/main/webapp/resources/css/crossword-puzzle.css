@@ -19,8 +19,17 @@
 	margin: 5px;
 }
 
+.list-text ul {
+	list-style: none;
+}
+
 .blank-cell {
 	background-color:#000000;
+}
+
+.selected-cell {
+	background-color: skyblue;
+	color: white;
 }
 
 .clickable {
@@ -30,8 +39,13 @@
 .linkable {
 	cursor:pointer;
 	color:blue;
-	text-decoration:underline;
+	text-decoration:none;
 }
+.linkable:hover {
+	background: skyblue;
+	color: white;
+}
+
 .background-text {
 	position: absolute;
 	top: 0;
@@ -85,6 +99,7 @@
 	border: 2px solid black;
 	font-family: tahoma;
 	position: fixed;
+	z-index: 10;
 	top: 50%;
 	left: 50%;
 	width: 30em;

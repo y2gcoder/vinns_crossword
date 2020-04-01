@@ -40,33 +40,6 @@
 					</tr>
 				</table>
 			</div>
-			<!-- 정답 칸 -->
-			<!-- 그대로 불러오기 -->
-			<div id="answer-form">
-				<div class="short-margin">
-					<p id="position-and-clue"></p>
-					<p>Answer : <input id="solution-answer" type="text" size="40"></p>
-					<p id="answer-results" class="hidden"></p>
-					<p>
-						<input type="button" id="cancel-button" value="Cancel"> 
-						<input type="button" id="answer-button" value="Answer">
-						<input type="button" id="reveal-answer-button" value="Reveal Answer">
-					</p>
-				</div>
-			</div>
-			<!-- 커스텀할 것 -->
-			<div>
-				<label>answer : </label>
-				<div>
-					<input type="text" id="input_answer">
-				</div>
-			</div>
-		</div>
-		<!-- right -->
-		<div id="right">
-			<!-- 크로스워드 그리드 -->
-			<div id="root" class="root">
-			</div>
 			
 			<!-- 퍼즐 리스트 -->
 			<div id="list_puzzle_wrapper">
@@ -83,8 +56,32 @@
 				</table>
 			</div>
 		</div>
+		<!-- right -->
+		<div id="right">
+			<!-- 크로스워드 그리드 -->
+			<div id="root" class="root">
+				<!-- 더미(공간 확보를 위해) -->
+				<table>
+				</table>
+				
+			</div>
+			
+			
+		</div>
 	</div>
-	
+	<!-- 정답 칸 -->
+	<div id="answer-form">
+		<div class="short-margin">
+			<p id="position-and-clue"></p>
+			<p>Answer : <input id="solution-answer" type="text" size="40"></p>
+			<p id="answer-results" class="hidden"></p>
+			<p>
+				<input type="button" id="cancel-button" value="Cancel"> 
+				<input type="button" id="answer-button" value="Answer">
+				<input type="button" id="reveal-answer-button" value="Reveal Answer">
+			</p>
+		</div>
+	</div>
 	<!-- button 모음 -->
 	<div>
 		<button type="button">Check answers</button>

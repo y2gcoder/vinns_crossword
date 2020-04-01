@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vinnsmedia.crossword.dao.CrosswordDAO;
+import com.vinnsmedia.crossword.util.CreateCrossword;
 import com.vinnsmedia.crossword.vo.CrosswordDTO;
 import com.vinnsmedia.crossword.vo.CrosswordVO;
 import com.vinnsmedia.crossword.vo.Puzzle;
@@ -140,6 +141,44 @@ public class CrosswordServiceImpl implements CrosswordService{
 		}
 		System.out.println(crossword);
 		return crossword;
+	}
+
+
+
+	@Override
+	public char[][] paintingPuzzle(List<Word> wordList) {
+		char[][] grid = new char[9][9];
+		
+		// 단어 이름만 추출한 리스트 만들기
+		List<String> nameList = new ArrayList<>();
+		for(Word w : wordList) {
+			String name = w.getName();
+			nameList.add(name);
+		}
+		
+		String[] words = nameList.toArray(new String[nameList.size()]);
+		for(int k=0;k<words.length;k++) {
+			for(int i=0;i<9;i++) {
+				for(int j=0;j<words[k].length();j++) {
+					System.out.println("몇번째 단어? "+k);
+					System.out.println("그리드 i? "+i);
+					System.out.println("그리드 j? "+j);
+					grid[i][j] = words[k].charAt(j);
+				}
+			}
+		}
+		CreateCrossword.fillGrid(grid, words, null);
+		
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				System.out.print(grid[i][j]);
+			}
+			System.out.println();
+		}
+
+		
+		
+		return grid;
 	}
 	
 	

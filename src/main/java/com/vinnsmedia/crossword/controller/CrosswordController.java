@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.vinnsmedia.crossword.service.CrosswordService;
 import com.vinnsmedia.crossword.vo.CrosswordDTO;
 import com.vinnsmedia.crossword.vo.CrosswordVO;
+import com.vinnsmedia.crossword.vo.Word;
 import com.vinnsmedia.crossword.vo.WordDTO;
 
 @Controller
@@ -96,6 +97,9 @@ public class CrosswordController {
 		ResponseEntity<CrosswordVO> entity = null;
 		
 		CrosswordVO crossword = crosswordService.findPuzzleBySeq(seq);
+		// 안되는 것
+		/* char[][] grid = crosswordService.paintingPuzzle(crossword.getWordList()); */
+		
 		
 		if(crossword != null && crossword.getWordList().size() > 0) {
 			entity = new ResponseEntity<>(crossword, HttpStatus.OK);
@@ -105,5 +109,16 @@ public class CrosswordController {
 		
 		return entity;
 	}
+	
+//	// 퍼즐 만들기
+//	private void paintingPuzzle(CrosswordVO crossword) {
+//		String[] words = null;
+//		List<Word> wordList = crossword.getWordList();
+//		for(Word vo : wordList) {
+//			String word = vo.getName();
+//		}
+//		
+//		
+//	}
 	
 }

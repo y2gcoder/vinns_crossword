@@ -32,6 +32,11 @@
 	color: white;
 }
 
+.focused-cell {
+	background-color: skyblue;
+	color: white;
+}
+
 .clickable {
 	cursor:pointer;
 }
@@ -46,6 +51,7 @@
 	color: white;
 }
 
+
 .background-text {
 	position: absolute;
 	top: 0;
@@ -58,9 +64,12 @@
 
 .strikeout {
 	position: relative;
+	text-decoration: line-through;
+	color: skyblue;
 }
 
-.strikeout::after {
+/* .strikeout::after {
+	
 	border-bottom: 0.250em solid blue;
 	content: "";
 	left: 0;
@@ -68,13 +77,16 @@
 	position: absolute;
 	right: 0;
 	top: 50%;
-}
+} */
 
 .red-strikeout {
 	position: relative;
+	text-decoration: line-through;
+	color: red;
 }
 
-.red-strikeout::after {
+/* .red-strikeout::after {
+	
 	border-bottom: 0.250em solid red;
 	content: "";
 	left: 0;
@@ -82,7 +94,7 @@
 	position: absolute;
 	right: 0;
 	top: 50%;
-}
+} */
 
 .crossword-grid-cell-number {
 	float: left;

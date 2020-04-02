@@ -18,8 +18,12 @@
 	#left-list {
 		border-bottom: 1px solid black;
 	}
+	
+	#list_puzzle_table tbody {
+		overflow: auto;
+	}
 </style>
-	<div id="crossword-container">
+	<div  class="container" id="crossword-container">
 		<!-- left -->
 		<div id="left">
 			<!-- 제목 -->
@@ -43,12 +47,12 @@
 			
 			<!-- 퍼즐 리스트 -->
 			<div id="list_puzzle_wrapper">
-				<table id="list_puzzle_table">
+				<table class="table table-hover" id="list_puzzle_table">
 					<thead>
 						<tr>
-							<th>No</th>
-							<th>Puzzle Title</th>
-							<th>Words</th>
+							<th scope="col">No</th>
+							<th scope="col">Puzzle Title</th>
+							<th scope="col">Words</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -61,12 +65,276 @@
 			<!-- 크로스워드 그리드 -->
 			<div id="root" class="root">
 				<!-- 더미(공간 확보를 위해) -->
-				<table>
+				<table class="puzzle" border="1" cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+						<tr class="letter-row">
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+							<td class="relative-position letter-cell blank-cell">
+								<span class="letter-text"></span>
+							</td>
+						</tr>
+					</tbody>
 				</table>
-				
 			</div>
-			
-			
+		</div>
+		<!-- button 모음 -->
+		<div>
+			<button type="button" class="btn btn-outline-primary" id="btnNewPuzzle">New puzzle</button>
 		</div>
 	</div>
 	<!-- 정답 칸 -->
@@ -82,14 +350,12 @@
 			</p>
 		</div>
 	</div>
-	<!-- button 모음 -->
-	<div>
-		<button type="button">Check answers</button>
-		<button type="button" id="btnNewPuzzle">New puzzle</button>
-	</div>
 	
+<script type="text/javascript">
+	//god 모드 플래그
+	var godmode = false;
+</script>	
 <%@ include file="./common/footer.jsp" %>
-
 <script>
 	$(function(){
 		getPuzzleList();
@@ -105,13 +371,13 @@
 			var html = "";
 			$(puzzles).each(function(){
 				html += "<tr class='list_puzzle_one'>";
-				html += "	<th>";
+				html += "	<th scope='row' class='text-center'>";
 				html += this.seq;
 				html += "	</th>";
-				html += "	<td>";
+				html += "	<td class='text-center'>";
 				html += this.title;
 				html += "	</td>";
-				html += "	<td>";
+				html += "	<td class='text-center'>";
 				html += this.count;
 				html += "	</td>";
 				html += "</tr>";
@@ -143,6 +409,8 @@
 				puzzleword.push(desc);
 				puzzlewords.push(puzzleword);
 			});
+			
+			
 			crosswordPuzzle(puzzlewords);
 		}).fail(function(xhr, status, errorThrown){
 			console.log(errorThrown+" / "+status);

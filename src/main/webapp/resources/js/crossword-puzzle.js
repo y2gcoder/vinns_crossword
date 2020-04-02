@@ -14,10 +14,10 @@ var crosswordclues = [];
 		Turn on to show the crossword puzzle completed, which makes debugging and coding much easier.
 		
 	*/
+// confirm 에서만 보이게 하자. 
+function areWeInGodMode(godmode) {
+	return godmode;
 
-function areWeInGodMode() {
-	return false;
-	return true;
 }
 
 	/* areWeRandomizingPuzzleWords()
@@ -134,6 +134,14 @@ function showCrossWordOptions() {
 		$('#position-and-clue').html('<b>' + acrosstext + '</b> : ' + $(this).attr('data-clue'));
 		$('#answer-form').show();
 		
+		var wordLength = word.length;
+		var x = $(this).data("x");
+		var y = $(this).data("y");
+		var across = $(this).data("across");
+		
+		focusSolving(wordLength, x, y, across);
+		
+		
 		if($(this).children('span').attr('data-solved')) {
 			$('#answer-button').attr('disabled', true);
 			$('#reveal-answer-button').attr('disabled', true);
@@ -181,6 +189,15 @@ function showCrossWordOptions() {
 	var closesolvefunction = function() {
 		$('#answer-results').hide();
 		$('#answer-form').hide();
+		
+		
+		var wordLength = $("#answer-button").data("word").length;
+		var x = $("#answer-button").data("x");
+		var y = $("#answer-button").data("y");
+		var across = $("#answer-button").data("across");
+		
+		focusOutSolving(wordLength, x, y, across);
+		
 		return false;
 	}
 	
@@ -191,8 +208,11 @@ function showCrossWordOptions() {
 		*/
 	
 	var answerfunction = function() {
-		var word = $(this).attr('data-word');
+		var word = $("#answer-button").attr('data-word');
 		var answer = $('#solution-answer').val().toLowerCase();
+		
+		console.log(word);
+		console.log(answer);
 		
 		if(answer == word) {
 			var across = $(this).attr('data-across');
@@ -225,8 +245,13 @@ function showCrossWordOptions() {
 			}
 		}
 		
+		// 승리 조건
+		checkVictory();
+		
 		return false;
 	}
+	
+	
 	
 		/* revealanswerfunction()
 		
@@ -259,12 +284,37 @@ function showCrossWordOptions() {
 		$('#' + word + '-listing').attr('data-solved', true);
 		
 		$('#answer-form').hide();
+		
+		// 승리 조건
+		checkVictory();
 	}
 	
 	$('.word-clue').click(solvefunction);
 	$('#cancel-button').click(closesolvefunction);
 	$('#answer-button').click(answerfunction);
+	// enter key 추가
+	$("#solution-answer").keydown(function(e){if(e.keyCode==13) answerfunction();});
 	$('#reveal-answer-button').click(revealanswerfunction);
+	
+	
+}
+
+function checkVictory() {
+	var total = $(".linkable").length;
+	var pass = $(".strikeout").length;
+	var fail = $(".red-strikeout").length;
+	
+	if(total == (pass+fail)){
+		var msg;
+		if(pass == 0) {
+			msg = "힘내세요!";
+		}else if(pass == total) {
+			msg = "완벽합니다! 혹시... 출제자세요?";
+		}else if(pass > 0 && pass < total) {
+			msg = "총 "+total+"문제 중 "+pass+"문제나 맞추셨네요! 잘하셨습니다!"
+		}
+		viewResult(msg);
+	}
 }
 
 			// Show Crossword Lists
@@ -277,6 +327,9 @@ function showCrossWordOptions() {
 	*/
 
 function showCrossWordLists(wordlists, clues) {
+	$("#left-list").children().not('center').remove();
+	$("#right-list").children().not('center').remove();
+	
 	var acrosslist = wordlists['across'];
 	var downlist = wordlists['down'];
 	
@@ -291,8 +344,8 @@ function showCrossWordLists(wordlists, clues) {
 	var acrosslistorderedelement = getViewableCrossWordList(acrosslistordered, clues, true);
 	var downlistorderedelement = getViewableCrossWordList(downlistordered, clues, false);
 	
-	$('#left-list').html(acrosslistorderedelement);
-	$('#right-list').html(downlistorderedelement);
+	$('#left-list').append(acrosslistorderedelement);
+	$('#right-list').append(downlistorderedelement);
 }
 
 	/* getViewableCrossWordList(listitems, clues, across)
@@ -454,7 +507,7 @@ function showCrossWordPuzzle(matrix) {
 			
 			tablerow += '<span class="letter-text" id="letter-position-' + i + '-' + j + '">';
 			
-			if(areWeInGodMode() && matrix[i][j] && matrix[i][j] != ' ') {
+			if(areWeInGodMode(godmode) && matrix[i][j] && matrix[i][j] != ' ') {
 				tablerow += matrix[i][j];
 			}
 			
@@ -1641,5 +1694,29 @@ $(".list-text").on("mouseleave", ".linkable", function(){
 	}
 	
 });
+
+function focusSolving(length, x, y, across) {
+	if(across) {
+		for(var i=y;i<(y+length);i++){
+			$("#cell-position-"+x+"-"+i).addClass("focused-cell");
+		}
+	}else {
+		for(var i=x;i<(x+length);i++){
+			$("#cell-position-"+i+"-"+y).addClass("focused-cell");
+		}
+	}
+}
+
+function focusOutSolving(length, x, y, across) {
+	if(across) {
+		for(var i=y;i<(y+length);i++){
+			$("#cell-position-"+x+"-"+i).removeClass("focused-cell");
+		}
+	}else {
+		for(var i=x;i<(x+length);i++){
+			$("#cell-position-"+i+"-"+y).removeClass("focused-cell");
+		}
+	}
+}
 
 

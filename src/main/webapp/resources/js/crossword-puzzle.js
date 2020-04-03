@@ -218,10 +218,10 @@ function showCrossWordOptions() {
 		console.log(answer);
 		
 		if(answer == word) {
-			var across = $(this).attr('data-across');
+			var across = $("#answer-button").attr('data-across');
 			
-			var x = parseInt($(this).attr('data-x'), 10);
-			var y = parseInt($(this).attr('data-y'), 10);
+			var x = parseInt($("#answer-button").attr('data-x'), 10);
+			var y = parseInt($("#answer-button").attr('data-y'), 10);
 			
 			if(across && across != 'false') {
 				for(var i = 0; i < answer.length; i++) {
@@ -241,6 +241,7 @@ function showCrossWordOptions() {
 			$('#' + word + '-listing').attr('data-solved', true);
 			
 			$('#answer-form').hide();
+			focusOutSolving(word.length, x, y, across);
 		} else {
 			if(!$('#answer-results').is(':visible')) {
 				$('#answer-results').show();
@@ -287,6 +288,7 @@ function showCrossWordOptions() {
 		$('#' + word + '-listing').attr('data-solved', true);
 		
 		$('#answer-form').hide();
+		focusOutSolving(word.length, x, y, across);
 		
 		// 승리 조건
 		checkVictory();
@@ -296,7 +298,14 @@ function showCrossWordOptions() {
 	$('#cancel-button').click(closesolvefunction);
 	$('#answer-button').click(answerfunction);
 	// enter key 추가
-	$("#solution-answer").keydown(function(e){if(e.keyCode==13) answerfunction();});
+	$("#solution-answer").keyup(function(e){if(e.keyCode==13) answerfunction();});
+	
+	$("#solution-answer").on("keyup", function(e){
+		if(e.keyCode==13){
+			console.log('enter');
+			answerfunction();
+		}
+	});
 	$('#reveal-answer-button').click(revealanswerfunction);
 	
 	
@@ -407,6 +416,10 @@ function fillInCrossWordNumbers(listitems, blockitems, blockitemsordered) {
 		var listitem = listitems[i];
 		var word = listitem['word'];
 		var coordinates = listitem['position'];
+		// 첫 문자
+		console.log(word);
+		console.log(coordinates);
+		var firstChar = word.substr(0,1);
 		
 		var blockingitemnumber = getBlockingItemNumber(coordinates, blockitems, blockitemsordered);
 		
@@ -417,12 +430,17 @@ function fillInCrossWordNumbers(listitems, blockitems, blockitemsordered) {
 		
 		var element = '<div class="background-text"><span class="crossword-grid-cell-number">' + fillnumber + '</span></div>';
 		
+		// 안에 넣을 문자 시리즈 만들기
+		var firstCharElement = '<span class="letter-text" id="letter-position-'+coordinates[0]+'-'+coordinates[1]+'">'+firstChar+'</span>';
+		
 		var parentelement;
 		
 		parentelement = $('#cell-position-' + coordinates[0] + '-' + coordinates[1]);
 		
 		if(parentelement && $(parentelement).attr('id')) {
+			$(parentelement).html(firstCharElement);
 			$(parentelement).prepend(element);
+			
 		}
 		
 		orderedlist[listnumber] = {
@@ -513,6 +531,14 @@ function showCrossWordPuzzle(matrix) {
 			if(areWeInGodMode(godmode) && matrix[i][j] && matrix[i][j] != ' ') {
 				tablerow += matrix[i][j];
 			}
+			
+//			// 갓 모드 아닐 때는 첫글자만 표시하게
+//			if(!areWeInGodMode(godmode)){
+//				console.log("matrix["+i+"]["+j+"] : "+matrix[i][j]);
+//				if(matrix[i][j] && matrix[i][j] != ' ' && $(".background-text")){
+//					tablerow += matrix[i][j];
+//				}
+//			}
 			
 			tablerow += '</span>';
 			
@@ -1690,13 +1716,11 @@ $(".list-text").on("mouseleave", ".linkable", function(){
 	
 	if(across=='true') {
 		for(var i=y;i<(y+wordlength);i++){
-			console.log(y+wordlength);
 			$("#cell-position-"+x+"-"+i).removeClass("selected-cell");
 		}
 		return;
 	}else {
 		for(var i=x;i<(x+wordlength);i++){
-			console.log(x+wordlength);
 			$("#cell-position-"+i+"-"+y).removeClass("selected-cell");
 		}
 		return;

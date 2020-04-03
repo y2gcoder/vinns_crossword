@@ -1,12 +1,13 @@
 .puzzle {
 	border-collapse: collapse;
-	border-color:#000000;
+	
 }
 
 .letter-cell {
 	text-align:center;
 	height:40px;
 	width:40px;
+	border-color:#000000;
 }
 
 .letter-text {
@@ -25,6 +26,7 @@
 
 .blank-cell {
 	background-color:#000000;
+	border-color:#000000;
 }
 
 .selected-cell {

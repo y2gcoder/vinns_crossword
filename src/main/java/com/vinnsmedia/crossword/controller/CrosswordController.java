@@ -73,6 +73,20 @@ public class CrosswordController {
 		
 		return entity;
 	}
+	// 제목 중복 체크
+	@PostMapping("/title/{title}")
+	@ResponseBody
+	public ResponseEntity<String> checkTitle(@PathVariable("title") String title) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		if (crosswordService.checkTitle(title)) {
+			entity = new ResponseEntity<>("Duplicated", HttpStatus.OK);
+		}else {
+			entity = new ResponseEntity<>("Available", HttpStatus.OK);
+		}
+		
+		return entity;
+	}
 	
 	@GetMapping("/puzzles")
 	@ResponseBody

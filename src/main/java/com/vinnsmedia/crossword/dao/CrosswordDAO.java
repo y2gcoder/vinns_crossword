@@ -31,7 +31,8 @@ public interface CrosswordDAO {
 	Integer getCount(Integer puzzle_seq) throws Exception;
 	@Update("UPDATE puzzle SET count=#{count} WHERE seq=#{puzzle_seq}")
 	Boolean updateCount(@Param("puzzle_seq") Integer puzzle_seq, @Param("count")Integer count) throws Exception;
-	
+	@Select("SELECT count(*) FROM puzzle WHERE title=#{title}")
+	Integer checkTitle(String title)throws Exception;
 	
 	
 	/**
@@ -45,4 +46,6 @@ public interface CrosswordDAO {
 	CrosswordVO getPuzzle(Integer puzzle_seq) throws Exception;
 	@Select("SELECT * FROM word WHERE puzzle_seq=#{seq} ORDER BY seq ASC")
 	List<Word> getWordsByPuzzleSeq(Integer seq) throws Exception;
+	
+	
 }

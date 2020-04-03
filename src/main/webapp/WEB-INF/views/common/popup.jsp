@@ -72,6 +72,10 @@
 		align-items: center;
 		
 	}
+	
+	.changeColor  {
+		background-color: #f0d71d;
+	}
 </style>
 <div id="myModal" class="modalInfo">
 	<div class="modalInfo-content">
@@ -101,6 +105,8 @@
 	function viewResult(msg) {
 		var info = document.getElementById("infoMessage");
 		info.innerText=msg;
+		$(".modalInfo-header").addClass("changeColor");
+		
 		modal.classList.add("popup-center");
 		
 		var hidden = "<input type='hidden' id='viewResult'/>";
@@ -110,6 +116,7 @@
 	window.onclick = function(event){
 		if(event.target == modal) {
 			modal.classList.remove("popup-center");
+			$(".modalInfo-header").removeClass("changeColor");
 			if($("#viewResult").length > 0){
 				location.reload();
 			}
@@ -118,6 +125,7 @@
 	
 	span.onclick = function(){
 		modal.classList.remove("popup-center");
+		$(".modalInfo-header").removeClass("changeColor");
 		if($("#viewResult").length > 0){
 			location.reload();
 		}

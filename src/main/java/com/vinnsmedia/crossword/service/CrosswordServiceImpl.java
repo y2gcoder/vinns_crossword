@@ -180,6 +180,24 @@ public class CrosswordServiceImpl implements CrosswordService{
 		
 		return grid;
 	}
+
+
+
+	@Override
+	public Boolean checkTitle(String title) throws Exception {
+		Boolean isDuplicated = false;
+		
+		Integer count = crosswordDAO.checkTitle(title);
+		
+		if(count != null && count > 0) {
+			isDuplicated = true;
+		}else {
+			isDuplicated = false;
+		}
+		
+		
+		return isDuplicated;
+	}
 	
 	
 	

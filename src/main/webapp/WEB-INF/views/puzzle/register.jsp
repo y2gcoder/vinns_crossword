@@ -155,6 +155,23 @@
 				$("#title").val("");
 				$("#title").focus();
 				return;
+			}else {
+				$.ajax({
+					type: "POST",
+					url: "/title/"+title,
+					dataType: 'text',
+					contentType: 'application/json'
+				}).done(function(result){
+					if(result == 'Duplicated'){
+						openPopup("이미 사용하고 있는 제목입니다.");
+						$("#title").val("");
+						$("#title").focus();
+						return;
+					}
+				}).fail(function(xhr, status, errorThrown){
+					console.log(errorThrown+" / "+status);
+				});
+				
 			}
 			
 			var puzzlewords = [];

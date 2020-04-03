@@ -22,7 +22,10 @@ public interface CrosswordService {
 	CrosswordVO findPuzzleBySeq(Integer seq) throws Exception;
 	
 	// 퍼즐 되는지 확인
-	char[][] paintingPuzzle(List<Word> wordList);
+	char[][] paintingPuzzle(List<Word> wordList)throws Exception;
+	
+	// 제목 중복 확인
+	Boolean checkTitle(String title)throws Exception;
 	
 	
 	

@@ -4,14 +4,32 @@
 <style>
 	#crossword-container {
 		display:flex;
-		justify-content: space-around;
+		justify-content: space-between;
 	}
 	#lists {
 		border: 1px solid black;
+		width: 90%;
+		margin: auto;
 	}
-	#lists table tr {
+	
+	#lists table {
+		width: 100%;
+
+	}
+	
+	#lists table tbody {
+		width: 100%;
+	}
+	
+	#lists table tbody tr {
+		width: 100%;
 		display: flex;
+		justify-content: center;
+		align-items: center;
 		flex-direction: column;
+	}
+	#lists td {
+		width: 90%;
 	}
 	
 	
@@ -19,27 +37,65 @@
 		border-bottom: 1px solid black;
 	}
 	
+	#list_puzzle_table {
+		width: 90%;
+		margin: auto;
+	}
+	
 	#list_puzzle_table tbody {
 		overflow: auto;
+	}
+	
+	.divBtns {
+		display : flex;
+		justify-content: flex-start;
+	}
+	
+	#left {
+		width:50vw;
+	}
+	#left h2 {
+		width: 90%;
+		margin: 10px auto;
+	}
+	#right {
+		width:50vw;
+		display:flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
 	<div  class="container" id="crossword-container">
 		<!-- left -->
 		<div id="left">
 			<!-- 제목 -->
-			<h2 id="puzzle_title"></h2>
+			<h2 id="puzzle_title">퍼즐 제목</h2>
 			<div id="lists" class="lists">
 				<table>
 					<tr>
-						<td width:"50%" id="left-list" valign="top" class="list-text">
+						<td id="left-list" valign="top" class="list-text">
 							<center>
 								<h3>Across</h3>
 							</center>
+							<ul>
+								<li class="word-clue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+							</ul>
 						</td>
-						<td width:"50%" id="right-list" valign="top" class="list-text">
+						<td  id="right-list" valign="top" class="list-text">
 							<center>
 								<h3>Down</h3>
 							</center>
+							<ul>
+								<li class="word-clue">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+								<li class="word-clue">&nbsp;</li>
+							</ul>
 						</td>
 					</tr>
 				</table>
@@ -50,9 +106,9 @@
 				<table class="table table-hover" id="list_puzzle_table">
 					<thead>
 						<tr>
-							<th scope="col">No</th>
-							<th scope="col">Puzzle Title</th>
-							<th scope="col">Words</th>
+							<th scope="col" class="text-center">No</th>
+							<th scope="col" class="text-center">Puzzle Title</th>
+							<th scope="col" class="text-center">Words</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -332,22 +388,30 @@
 				</table>
 			</div>
 		</div>
-		<!-- button 모음 -->
-		<div>
-			<button type="button" class="btn btn-outline-primary" id="btnNewPuzzle">New puzzle</button>
+		
+	</div>
+	<!-- button 모음 -->
+	<div class="container">
+		<div class="divBtns">
+			<button type="button" class="btn btn-outline-primary m-3" id="btnNewPuzzle">New puzzle</button>
 		</div>
 	</div>
 	<!-- 정답 칸 -->
-	<div id="answer-form">
+	<div class="card" id="answer-form">
 		<div class="short-margin">
-			<p id="position-and-clue"></p>
-			<p>Answer : <input id="solution-answer" type="text" size="40"></p>
-			<p id="answer-results" class="hidden"></p>
-			<p>
-				<input type="button" id="cancel-button" value="Cancel"> 
-				<input type="button" id="answer-button" value="Answer">
-				<input type="button" id="reveal-answer-button" value="Reveal Answer">
-			</p>
+			<div id="position-and-clue" class="form-group row"></div>
+			<div class="form-group row">
+				<p class="col-sm-2 align-bottom align-text-bottom" style="margin: auto;">Answer : </p>
+				<input id="solution-answer" class="form-control col-sm-10" type="text">
+			</div>
+			<div class="form-group row">
+				<p id="answer-results" class="hidden"></p>
+			</div>
+			<div class="form-group row groupCenter">
+				<input type="button" class="mr-2 btn btn-dark" id="cancel-button" value="Cancel"> 
+				<input type="button" class="mr-2 btn btn-success" id="answer-button" value="Answer">
+				<input type="button" class="btn btn-danger" id="reveal-answer-button" value="Reveal Answer">
+			</div>
 		</div>
 	</div>
 	

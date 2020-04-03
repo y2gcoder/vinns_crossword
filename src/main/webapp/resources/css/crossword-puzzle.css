@@ -108,24 +108,30 @@
 
 #answer-form {
 	display: none;
-	border: 2px solid black;
 	font-family: tahoma;
 	position: fixed;
 	z-index: 10;
 	top: 50%;
 	left: 50%;
-	width: 30em;
-	height: 12em;
-	margin-top: -9em;
-	margin-left: -15em;
+	width: 50vw;
+	/* height: 30vh; */
+	margin-top: -15vh;
+	margin-left: -25vw;
 	border: 1px solid #CCCCCC;
-	background-color: #F3F3F3;
+	background-color: #ffffff;
 }
 
 .short-margin {
 	margin: 20px;
+	height: 100%;
 }
 
 .hidden {
 	display: none;
+}
+
+.groupCenter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

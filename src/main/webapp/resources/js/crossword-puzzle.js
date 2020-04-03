@@ -131,13 +131,13 @@ function showCrossWordOptions() {
 		
 		var word = $(this).attr('data-word');
 		var acrosstext = $(this).attr('data-across') == 'false' ? 'Down' : 'Across';
-		$('#position-and-clue').html('<b>' + acrosstext + '</b> : ' + $(this).attr('data-clue'));
+		$('#position-and-clue').html('<p class="col-sm-2"><b>' + acrosstext + '</b></p><p class="col-sm-10">' + $(this).attr('data-clue')+'</p>');
 		$('#answer-form').show();
 		
 		var wordLength = word.length;
-		var x = $(this).data("x");
-		var y = $(this).data("y");
-		var across = $(this).data("across");
+		var x = Number($(this).attr("data-x"));
+		var y = Number($(this).attr("data-y"));
+		var across = $(this).attr("data-across");
 		
 		focusSolving(wordLength, x, y, across);
 		
@@ -187,16 +187,19 @@ function showCrossWordOptions() {
 		*/
 	
 	var closesolvefunction = function() {
-		$('#answer-results').hide();
-		$('#answer-form').hide();
 		
+		console.log($("#answer-button").attr("data-word"));
 		
-		var wordLength = $("#answer-button").data("word").length;
-		var x = $("#answer-button").data("x");
-		var y = $("#answer-button").data("y");
-		var across = $("#answer-button").data("across");
+		var wordLength = $("#answer-button").attr("data-word").length;
+		var x = Number($("#answer-button").attr("data-x"));
+		var y = Number($("#answer-button").attr("data-y"));
+		var across = $("#answer-button").attr("data-across");;
+		
 		
 		focusOutSolving(wordLength, x, y, across);
+		
+		$('#answer-results').hide();
+		$('#answer-form').hide();
 		
 		return false;
 	}
@@ -1658,13 +1661,14 @@ function shuffle(array) {
 
 // 마우스 올렸을 시 
 $(".list-text").on("mouseenter", ".linkable", function(){
-	var word = $(this).closest(".word-clue").data("word");
-	var x = $(this).closest(".word-clue").data("x");
-	var y = $(this).closest(".word-clue").data("y");
-	var across = $(this).closest(".word-clue").data("across");
+	var word = $(this).closest(".word-clue").attr("data-word");
+	var x = Number($(this).closest(".word-clue").attr("data-x"));
+	var y = Number($(this).closest(".word-clue").attr("data-y"));
+	var across = $(this).closest(".word-clue").attr("data-across");
 	var wordlength = word.length;
 	
-	if(across) {
+	
+	if(across=='true') {
 		for(var i=y;i<(y+wordlength);i++){
 			$("#cell-position-"+x+"-"+i).addClass("selected-cell");
 		}
@@ -1677,45 +1681,56 @@ $(".list-text").on("mouseenter", ".linkable", function(){
 });
 //마우스가 벗어났을 시
 $(".list-text").on("mouseleave", ".linkable", function(){
-	var word = $(this).closest(".word-clue").data("word");
-	var x = $(this).closest(".word-clue").data("x");
-	var y = $(this).closest(".word-clue").data("y");
-	var across = $(this).closest(".word-clue").data("across");
+	var word = $(this).closest(".word-clue").attr("data-word");
+	var x = Number($(this).closest(".word-clue").attr("data-x"));
+	var y = Number($(this).closest(".word-clue").attr("data-y"));
+	var across = $(this).closest(".word-clue").attr("data-across");
 	var wordlength = word.length;
 	
-	if(across) {
+	
+	if(across=='true') {
 		for(var i=y;i<(y+wordlength);i++){
+			console.log(y+wordlength);
 			$("#cell-position-"+x+"-"+i).removeClass("selected-cell");
 		}
+		return;
 	}else {
 		for(var i=x;i<(x+wordlength);i++){
+			console.log(x+wordlength);
 			$("#cell-position-"+i+"-"+y).removeClass("selected-cell");
 		}
+		return;
 	}
 	
 });
 
 function focusSolving(length, x, y, across) {
-	if(across) {
+	if(across=='true') {
 		for(var i=y;i<(y+length);i++){
 			$("#cell-position-"+x+"-"+i).addClass("focused-cell");
 		}
+		return;
 	}else {
 		for(var i=x;i<(x+length);i++){
 			$("#cell-position-"+i+"-"+y).addClass("focused-cell");
 		}
+		return;
 	}
 }
 
 function focusOutSolving(length, x, y, across) {
-	if(across) {
+	if(across=='true') {
 		for(var i=y;i<(y+length);i++){
 			$("#cell-position-"+x+"-"+i).removeClass("focused-cell");
+			
+			
 		}
+		return;
 	}else {
 		for(var i=x;i<(x+length);i++){
 			$("#cell-position-"+i+"-"+y).removeClass("focused-cell");
 		}
+		return;
 	}
 }
 

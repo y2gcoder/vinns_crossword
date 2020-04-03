@@ -29,7 +29,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>1. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[0].name" id="name1" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[0].name" id="name1" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[0].description" id="desc1" placeholder="50자 내 입력">
@@ -39,7 +39,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>2. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[1].name" id="name2" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[1].name" id="name2" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[1].description" id="desc2" placeholder="50자 내 입력">
@@ -49,7 +49,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>3. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[2].name" id="name3" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[2].name" id="name3" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[2].description" id="desc3" placeholder="50자 내 입력">
@@ -59,7 +59,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>4. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[3].name" id="name4" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[3].name" id="name4" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[3].description" id="desc4" placeholder="50자 내 입력">
@@ -69,7 +69,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>5. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[4].name" id="name5" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[4].name" id="name5" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[4].description" id="desc5" placeholder="50자 내 입력">
@@ -79,7 +79,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>6. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[5].name" id="name6" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[5].name" id="name6" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[5].description" id="desc6" placeholder="50자 내 입력">
@@ -89,7 +89,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>7. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[6].name" id="name7" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[6].name" id="name7" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[6].description" id="desc7" placeholder="50자 내 입력">
@@ -99,7 +99,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>8. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[7].name" id="name8" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[7].name" id="name8" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[7].description" id="desc8" placeholder="50자 내 입력">
@@ -109,7 +109,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>9. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[8].name" id="name9" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[8].name" id="name9" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[8].description" id="desc9" placeholder="50자 내 입력">
@@ -119,7 +119,7 @@
 			<div class="form-group row">
 				<div class="col-sm-1"><span>10. </span></div>
 				<div class="col-sm-3">
-					<input type="text" class="form-control" name="wordList[9].name" id="name10" placeholder="영문 3~9자">
+					<input type="text" class="form-control input_word" name="wordList[9].name" id="name10" placeholder="영문 3~9자">
 				</div>
 				<div class="col-sm-8">
 					<input type="text" class="form-control" name="wordList[9].description" id="desc10" placeholder="50자 내 입력">
@@ -142,6 +142,11 @@
 	
 <%@ include file="../common/footer.jsp" %>
 <script>
+	// 숫자와 한글 입력 제한하기
+	$(".input_word").on("keyup",function(){
+		$(this).val($(this).val().replace(/[^a-z]/g, ""));
+	});
+	
 	$(function(){
 		$("#btnConfirmPage").on("click", function(){
 			// 유효성 검사부터 해야겠다.

@@ -1747,7 +1747,6 @@ function focusOutSolving(length, x, y, across) {
 		for(var i=y;i<(y+length);i++){
 			$("#cell-position-"+x+"-"+i).removeClass("focused-cell");
 			
-			
 		}
 		return;
 	}else {

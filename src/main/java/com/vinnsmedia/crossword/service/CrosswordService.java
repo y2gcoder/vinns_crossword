@@ -1,10 +1,10 @@
 package com.vinnsmedia.crossword.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.vinnsmedia.crossword.vo.CrosswordDTO;
 import com.vinnsmedia.crossword.vo.CrosswordVO;
-import com.vinnsmedia.crossword.vo.Word;
 import com.vinnsmedia.crossword.vo.WordDTO;
 
 public interface CrosswordService {
@@ -19,13 +19,13 @@ public interface CrosswordService {
 	List<CrosswordVO> getPuzzleList()throws Exception;
 
 	// 해당 퍼즐 가져오기
-	CrosswordVO findPuzzleBySeq(Integer seq) throws Exception;
-	
-	// 퍼즐 되는지 확인
-	char[][] paintingPuzzle(List<Word> wordList)throws Exception;
+	CrosswordVO findPuzzleBySeq(Long seq) throws Exception;
 	
 	// 제목 중복 확인
 	Boolean checkTitle(String title)throws Exception;
+	
+	// 퍼즐 구성에 필요한 것 다 담기
+	Map<String, Object> makePuzzle(CrosswordDTO crosswordDTO);
 	
 	
 	

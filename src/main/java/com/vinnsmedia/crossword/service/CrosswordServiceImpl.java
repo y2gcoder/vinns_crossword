@@ -1,14 +1,17 @@
 package com.vinnsmedia.crossword.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vinnsmedia.crossword.dao.CrosswordDAO;
-import com.vinnsmedia.crossword.util.CreateCrossword;
+import com.vinnsmedia.crossword.util.Crossword;
+import com.vinnsmedia.crossword.util.MatrixWord;
 import com.vinnsmedia.crossword.vo.CrosswordDTO;
 import com.vinnsmedia.crossword.vo.CrosswordVO;
 import com.vinnsmedia.crossword.vo.Puzzle;
@@ -59,7 +62,7 @@ public class CrosswordServiceImpl implements CrosswordService{
 			Puzzle tempPuzzle = crosswordDAO.getTempPuzzle();
 			System.out.println(tempPuzzle);
 			if(tempPuzzle != null) {
-				Integer puzzle_seq = tempPuzzle.getSeq();
+				Long puzzle_seq = tempPuzzle.getSeq();
 				
 				// DB에 word가 입력되는 횟수
 				Integer insertCounting = 0;
@@ -93,7 +96,7 @@ public class CrosswordServiceImpl implements CrosswordService{
 					crossword = crosswordDAO.getPuzzle(puzzle_seq);
 					// 바디 불러옴.
 					if(crossword != null) {
-						Integer seq = crossword.getSeq();
+						Long seq = crossword.getSeq();
 						List<Word> words = crosswordDAO.getWordsByPuzzleSeq(seq);
 						crossword.setWordList(words);
 					}
@@ -115,7 +118,7 @@ public class CrosswordServiceImpl implements CrosswordService{
 		// 단어 리스트 넣기
 		if(list != null && list.size() > 0) {
 			for(CrosswordVO puzzle : list) {
-				Integer puzzle_seq = puzzle.getSeq();
+				Long puzzle_seq = puzzle.getSeq();
 				
 				List<Word> wordList = crosswordDAO.getWordsByPuzzleSeq(puzzle_seq);
 				if(wordList != null && wordList.size() > 0) {
@@ -129,7 +132,7 @@ public class CrosswordServiceImpl implements CrosswordService{
 
 	@Override
 	@Transactional
-	public CrosswordVO findPuzzleBySeq(Integer seq) throws Exception {
+	public CrosswordVO findPuzzleBySeq(Long seq) throws Exception {
 		// 일단 기본 puzzle 몸체부터
 		CrosswordVO crossword = crosswordDAO.getPuzzle(seq);
 		// 단어 리스트 넣기
@@ -139,49 +142,34 @@ public class CrosswordServiceImpl implements CrosswordService{
 				crossword.setWordList(wordList);
 			}
 		}
-		System.out.println(crossword);
+		
+		// 만들어진 matrix 담기
+		List<String> words = new ArrayList<>();
+		for(Word dto : crossword.getWordList()) {
+			words.add(dto.getName());
+		}
+		Crossword util = new Crossword();
+		Character[][] matrix = util.makePuzzle(words);
+		
+		// test
+		if(matrix != null) {
+			for(int i=0;i<matrix.length;i++) {
+				for(int j=0;j<matrix[i].length;j++) {
+					if(matrix[i][j] != null) {
+						System.out.print(matrix[i][j]);
+					}else {
+						System.out.print("+");
+					}
+					
+				}
+				System.out.println("");
+			}
+		}
+		
+		
+		
 		return crossword;
 	}
-
-
-
-	@Override
-	public char[][] paintingPuzzle(List<Word> wordList) {
-		char[][] grid = new char[9][9];
-		
-		// 단어 이름만 추출한 리스트 만들기
-		List<String> nameList = new ArrayList<>();
-		for(Word w : wordList) {
-			String name = w.getName();
-			nameList.add(name);
-		}
-		
-		String[] words = nameList.toArray(new String[nameList.size()]);
-		for(int k=0;k<words.length;k++) {
-			for(int i=0;i<9;i++) {
-				for(int j=0;j<words[k].length();j++) {
-					System.out.println("몇번째 단어? "+k);
-					System.out.println("그리드 i? "+i);
-					System.out.println("그리드 j? "+j);
-					grid[i][j] = words[k].charAt(j);
-				}
-			}
-		}
-		CreateCrossword.fillGrid(grid, words, null);
-		
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				System.out.print(grid[i][j]);
-			}
-			System.out.println();
-		}
-
-		
-		
-		return grid;
-	}
-
-
 
 	@Override
 	public Boolean checkTitle(String title) throws Exception {
@@ -197,6 +185,50 @@ public class CrosswordServiceImpl implements CrosswordService{
 		
 		
 		return isDuplicated;
+	}
+
+
+
+	@Override
+	public Map<String, Object> makePuzzle(CrosswordDTO crosswordDTO) {
+		Map<String, Object> everything = null;
+		
+		if(crosswordDTO != null) {
+			everything = new HashMap<>();
+			// 퍼즐 제목 넣기
+			everything.put("title", crosswordDTO.getTitle());
+			
+			
+			// word, hint 담기
+			everything.put("puzzleList", crosswordDTO.getWordList());
+			
+			
+			
+			// 만들어진 matrix 담기
+			List<String> words = new ArrayList<>();
+			for(WordDTO dto : crosswordDTO.getWordList()) {
+				words.add(dto.getName());
+			}
+			Crossword crossword = new Crossword();
+			Character[][] matrix = crossword.makePuzzle(words);
+			
+			// test
+			if(matrix != null) {
+				for(int i=0;i<matrix.length;i++) {
+					for(int j=0;j<matrix[i].length;j++) {
+						if(matrix[i][j] != null) {
+							System.out.print(matrix[i][j]);
+						}else {
+							System.out.print("+");
+						}
+						
+					}
+					System.out.println("");
+				}
+			}
+		}
+		
+		return everything;
 	}
 	
 	

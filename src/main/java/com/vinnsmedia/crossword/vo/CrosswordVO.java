@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class CrosswordVO {
-	private Integer seq;
+	private Long seq;
 	private String title;
 	private Integer count;
 	

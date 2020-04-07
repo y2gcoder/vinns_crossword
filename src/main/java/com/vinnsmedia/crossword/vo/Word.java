@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public class Word {
-	private Integer seq;
+	private Long seq;
 	private Integer length;
-	private Integer puzzle_seq;
+	private Long puzzle_seq;
 	private String name;
 	private String description;
 	

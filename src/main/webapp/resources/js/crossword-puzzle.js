@@ -420,8 +420,6 @@ function fillInCrossWordNumbers(listitems, blockitems, blockitemsordered) {
 		var word = listitem['word'];
 		var coordinates = listitem['position'];
 		// 첫 문자
-		console.log(word);
-		console.log(coordinates);
 		var firstChar = word.substr(0,1);
 		
 		var blockingitemnumber = getBlockingItemNumber(coordinates, blockitems, blockitemsordered);

@@ -1,6 +1,7 @@
 package com.vinnsmedia.crossword.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ import com.google.gson.Gson;
 import com.vinnsmedia.crossword.service.CrosswordService;
 import com.vinnsmedia.crossword.vo.CrosswordDTO;
 import com.vinnsmedia.crossword.vo.CrosswordVO;
-import com.vinnsmedia.crossword.vo.Word;
 import com.vinnsmedia.crossword.vo.WordDTO;
 
 @Controller
@@ -45,6 +45,10 @@ public class CrosswordController {
 //		System.out.println(wordDTO.getWordList());
 		
 		CrosswordDTO crosswordDTO = crosswordService.createTempDTO(title, wordDTO.getWordList());
+		
+		// dto로 퍼즐 만들기 
+		Map<String, Object> Everything = crosswordService.makePuzzle(crosswordDTO);
+		
 		
 		// model 객체로 보내기 
 		model.addAttribute("check", new Gson().toJson(crosswordDTO));
@@ -107,12 +111,11 @@ public class CrosswordController {
 	@GetMapping("/puzzles/{seq}")
 	@ResponseBody
 	public ResponseEntity<CrosswordVO> findPuzzleBySeq(
-			@PathVariable("seq") Integer seq) throws Exception {
+			@PathVariable("seq") Long seq) throws Exception {
 		ResponseEntity<CrosswordVO> entity = null;
 		
 		CrosswordVO crossword = crosswordService.findPuzzleBySeq(seq);
-		// 안되는 것
-		/* char[][] grid = crosswordService.paintingPuzzle(crossword.getWordList()); */
+		
 		
 		
 		if(crossword != null && crossword.getWordList().size() > 0) {
@@ -124,15 +127,6 @@ public class CrosswordController {
 		return entity;
 	}
 	
-//	// 퍼즐 만들기
-//	private void paintingPuzzle(CrosswordVO crossword) {
-//		String[] words = null;
-//		List<Word> wordList = crossword.getWordList();
-//		for(Word vo : wordList) {
-//			String word = vo.getName();
-//		}
-//		
-//		
-//	}
+
 	
 }

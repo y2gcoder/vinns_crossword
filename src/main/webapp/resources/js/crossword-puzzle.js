@@ -510,6 +510,14 @@ function getBlockItemNumberPosition(word, items) {
 function showCrossWordPuzzle(matrix) {
 	var widestline = getWidestLine(matrix);
 	var tallestline = getTallestLine(matrix);
+	
+	// 정사각형 만들어 보자
+	if(widestline > tallestline) {
+		tallestline = widestline;
+	}else if (widestline < tallestline) {
+		widestline = tallestline;
+	}
+	
 	// 원래 있던 퍼즐 삭제
 	if($(".puzzle").length > 0) {
 		$("#root").html("");

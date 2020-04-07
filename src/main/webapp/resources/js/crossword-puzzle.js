@@ -99,6 +99,9 @@ function crosswordPuzzle(puzzlewords) {
 	}
 	
 	var fullgraph = buildCrosswordBlockGraphs(graphs);
+	
+	console.log(fullgraph);
+	
 	var wordlists = buildCrosswordLists(fullgraph['matrixpositions']);
 	
 	showCrossWordPuzzle(fullgraph['matrix']);

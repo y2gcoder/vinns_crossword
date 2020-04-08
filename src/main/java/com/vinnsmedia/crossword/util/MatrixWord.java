@@ -12,4 +12,6 @@ public class MatrixWord {
 	private Integer x;
 	private Integer y;
 	
+	List<MatchingWord> matchingWords;
+	
 }

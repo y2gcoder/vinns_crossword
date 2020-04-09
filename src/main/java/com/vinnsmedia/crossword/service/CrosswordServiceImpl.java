@@ -151,20 +151,20 @@ public class CrosswordServiceImpl implements CrosswordService{
 		Crossword util = new Crossword();
 		Character[][] matrix = util.makePuzzle(words);
 		
-		// test
-		if(matrix != null) {
-			for(int i=0;i<matrix.length;i++) {
-				for(int j=0;j<matrix[i].length;j++) {
-					if(matrix[i][j] != null) {
-						System.out.print(matrix[i][j]);
-					}else {
-						System.out.print("+");
-					}
-					
-				}
-				System.out.println("");
-			}
-		}
+//		// test
+//		if(matrix != null) {
+//			for(int i=0;i<matrix.length;i++) {
+//				for(int j=0;j<matrix[i].length;j++) {
+//					if(matrix[i][j] != null) {
+//						System.out.print(matrix[i][j]);
+//					}else {
+//						System.out.print("+");
+//					}
+//					
+//				}
+//				System.out.println("");
+//			}
+//		}
 		
 		
 		

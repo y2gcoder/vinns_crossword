@@ -52,6 +52,7 @@ public class CrosswordController {
 		
 		// model 객체로 보내기 
 		model.addAttribute("check", new Gson().toJson(crosswordDTO));
+		model.addAttribute("puzzle", Everything);
 		
 		return "puzzle/confirm";
 	}

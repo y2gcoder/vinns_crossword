@@ -148,23 +148,28 @@ public class CrosswordServiceImpl implements CrosswordService{
 		for(Word dto : crossword.getWordList()) {
 			words.add(dto.getName());
 		}
+		// 크로스워드 만드는 것과 관련된 모든 것들을 불러오기.
 		Crossword util = new Crossword();
-		Character[][] matrix = util.makePuzzle(words);
+		Map<String, Object> puzzle = util.makePuzzle(words);
 		
-//		// test
-//		if(matrix != null) {
-//			for(int i=0;i<matrix.length;i++) {
-//				for(int j=0;j<matrix[i].length;j++) {
-//					if(matrix[i][j] != null) {
-//						System.out.print(matrix[i][j]);
-//					}else {
-//						System.out.print("+");
-//					}
-//					
-//				}
-//				System.out.println("");
-//			}
-//		}
+//		System.out.println(puzzle);
+		// 실험
+		Character[][] matrix = (Character[][]) puzzle.get("matrix");
+		if(matrix != null) {
+			System.out.println(">>>>>>>>>>>퍼즐<<<<<<<<<<<");
+			for(int i=0;i<matrix.length;i++) {
+				for(int j=0;j<matrix[i].length;j++) {
+					if(matrix[i][j] != null) {
+						System.out.print(matrix[i][j]);
+					}else {
+						System.out.print("+");
+					}
+					
+				}
+				System.out.println("");
+			}
+		}
+		
 		
 		
 		
@@ -209,23 +214,12 @@ public class CrosswordServiceImpl implements CrosswordService{
 			for(WordDTO dto : crosswordDTO.getWordList()) {
 				words.add(dto.getName());
 			}
-			Crossword crossword = new Crossword();
-			Character[][] matrix = crossword.makePuzzle(words);
 			
-			// test
-			if(matrix != null) {
-				for(int i=0;i<matrix.length;i++) {
-					for(int j=0;j<matrix[i].length;j++) {
-						if(matrix[i][j] != null) {
-							System.out.print(matrix[i][j]);
-						}else {
-							System.out.print("+");
-						}
-						
-					}
-					System.out.println("");
-				}
-			}
+			// 크로스워드 만드는 것과 관련된 모든 것들을 불러오기.
+			Crossword util = new Crossword();
+			Map<String, Object> puzzle = util.makePuzzle(words);
+			
+			System.out.println(puzzle);
 		}
 		
 		return everything;

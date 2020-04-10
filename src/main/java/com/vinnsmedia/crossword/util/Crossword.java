@@ -3,13 +3,14 @@ package com.vinnsmedia.crossword.util;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Crossword {
 	
 	// size
 	final Integer SIZE = 50;
-	
 	
 	// across
 	Boolean across = true;
@@ -33,8 +34,8 @@ public class Crossword {
 	 *  9. 가장 오른쪽에 존재하는 문자의 인덱스와 가장 밑에 존재하는 문자의 인덱스를 이용하여 정사각형으로 자르자. 
 	 * 
 	 */
-	public Character[][] makePuzzle(List<String> words) {
-		
+	public Map<String, Object> makePuzzle(List<String> words) {
+		Map<String, Object> puzzle = new HashMap<>();
 		// 1. 단어들 길이별 정렬
 		sortDesc(words);
 		// matrix 형성하기
@@ -44,9 +45,13 @@ public class Crossword {
 		matrix = cutMatrix(matrix, matrixWords);
 //		System.out.println(matrixWords.size());
 		// 그려보기
-		testMatrix(matrix);
+//		testMatrix(matrix);
 		
-		return matrix;
+		// 완성되었으면 정보들 넣기
+		puzzle.put("matrix", matrix);
+		puzzle.put("matrixWords", matrixWords);
+		
+		return puzzle;
 	}
 	// 규모에 맞게 자르고 붙여놓자. 
 	private Character[][] cutMatrix(Character[][] matrix, List<MatrixWord> matrixWords) {
@@ -60,19 +65,16 @@ public class Crossword {
 		
 		// 3. 올겨야하는 값을 보고 matrixWords 값 수정
 		
-		System.out.println("좌표 이동하기 전 : "+matrixWords);
+//		System.out.println("좌표 이동하기 전 : "+matrixWords);
 		matrixWords = moveMatrixWords(matrix, matrixWords);
-		System.out.println("좌표 이동하기 후 : "+matrixWords);
+//		System.out.println("좌표 이동하기 후 : "+matrixWords);
 		
 		// 4. 자른 matrix에 그리고 종료
 		matrix = paintMatrix(cutMatrix, matrixWords);
 		
 		return matrix;
 	}
-	
-	
-
-	
+	// matrixword의 좌표값들 이동
 	private List<MatrixWord> moveMatrixWords(Character[][] matrix, List<MatrixWord> matrixWords) {
 		// 옮겨야 하는 값은 minX좌표와 minY좌표를 구하면 될 듯!
 		 Integer minX = SIZE-1;
@@ -127,7 +129,7 @@ public class Crossword {
 				}
 			}
 		}
-		System.out.println(minX+", "+minY+", "+maxX+", "+maxY);
+//		System.out.println(minX+", "+minY+", "+maxX+", "+maxY);
 		Integer width = maxX-minX+1;
 		Integer height = maxY-minY+1;
 		
@@ -141,7 +143,6 @@ public class Crossword {
 		
 		return cuttingSize;
 	}
-	
 	
 	// 매트릭스 형성 메소드
 	private Character[][] buildMatrix(Character[][] matrix, List<MatrixWord> matrixWords, List<String> words, Integer firstX, Integer firstY) {
@@ -159,7 +160,7 @@ public class Crossword {
 			}
 			// 3. 다음 단어들
 			String nextWord = words.get(i);
-			System.out.println(i+"번째 단어 : "+nextWord);
+//			System.out.println(i+"번째 단어 : "+nextWord);
 			for(int j=0;j<matrixWords.size();j++) {
 				MatrixWord spine = matrixWords.get(j);
 				// 재귀 금지
@@ -182,11 +183,7 @@ public class Crossword {
 						matrix = paintMatrix(matrix, matrixWords);
 						break;
 					}
-					
-					
 				}
-				
-				
 			}
 			
 			// 마지막 이었을 때 남은 단어 리스트 구하자.
@@ -213,9 +210,7 @@ public class Crossword {
 						}
 //						System.out.println("x : "+borderX+", y : "+borderY);
 					}
-					
 				}
-				
 			}
 			
 			// 한 개만 있다면?
@@ -234,11 +229,7 @@ public class Crossword {
 			}else if(remainWords.size() > 1) {
 				matrix = buildMatrix(matrix, matrixWords, remainWords, borderX+1, borderY+1);
 			}
-			
-			
 		}
-		
-		
 		return matrix;
 	}
 
@@ -246,7 +237,6 @@ public class Crossword {
 	private List<MatchingWord> findMatchingWords(MatrixWord spine, String nextWord) {
 		List<MatchingWord> matchingWords = new ArrayList<>();
 		String spineWord = spine.getWord();
-		
 		
 		for(int i=0;i<spineWord.length();i++) {
 			for(int j=0;j<nextWord.length();j++) {
@@ -259,8 +249,6 @@ public class Crossword {
 				}
 			}
 		}
-		
-		
 		return matchingWords;
 	}
 	
@@ -291,7 +279,7 @@ public class Crossword {
 		MatrixWord branchWord = null;
 //		testMatrix(matrix);
 		if(possibleBranch(matrix, spine, matchingWord)) {
-			System.out.println("가능하다 : "+spine);
+//			System.out.println("가능하다 : "+spine);
 //			System.out.println("현재 : "+matrixWords);
 			
 			branchWord = new MatrixWord();
@@ -310,8 +298,6 @@ public class Crossword {
 	
 	// 그리는 게 가능한가?
 	private boolean possibleBranch(Character[][] matrix, MatrixWord spine, MatchingWord matchingWord) {
-		
-		
 		
 		Boolean spineAcross = spine.getAcross();
 //			System.out.println(matchingWord);
@@ -336,8 +322,6 @@ public class Crossword {
 			}
 		}
 		
-		
-		
 		// 할당 되지 않았을 경우
 		AvailableSpace availableSpace = getAvailableSpace(matrix, spine, matchingWord);
 //		System.out.println("빈 공간 : "+availableSpace);
@@ -358,7 +342,6 @@ public class Crossword {
 				return false;
 			}
 			
-			
 		}else {
 			//nextWord의 필요 공간 구하기
 			NeedSpace needSpace = getNeedSpace(matchingWord.getNextWord(), matchingWord.getMatchingLetter(), spineAcross);
@@ -373,13 +356,9 @@ public class Crossword {
 			if((availableLeft-needLeft) < 0 || (availableRight-needRight) < 0 ) {
 				return false;
 			}
-			
 		}
-		
 		return true;
 	}
-	
-	
 	
 	// 필요 공간
 	private NeedSpace getNeedSpace(String nextWord, Character matchingLetter, Boolean spineAcross) {
@@ -506,7 +485,7 @@ public class Crossword {
 		
 		return availableSpace;
 	}
-	
+	// 공간 계산하는 메소드들
 	private Integer calRightSpace(Integer x, Integer y) {
 //		System.out.println("오른쪽 빈 공간 구하기");
 		Integer rightSpace = null;
@@ -527,7 +506,6 @@ public class Crossword {
 		
 		return rightSpace;
 	}
-
 	private Integer calLeftSpace(Integer x, Integer y) {
 //		System.out.println("왼쪽 빈 공간 구하기");
 		Integer leftSpace = null;
@@ -547,7 +525,6 @@ public class Crossword {
 		
 		return leftSpace;
 	}
-
 	private Integer calBottomSpace(Integer x, Integer y) {
 //		System.out.println("아래뽁 빈 공간 구하기");
 		Integer bottomSpace = null;
@@ -568,7 +545,6 @@ public class Crossword {
 		
 		return bottomSpace;
 	}
-
 	private Integer calTopSpace(Integer x, Integer y) {
 //		System.out.println("위쪽 빈 공간 구하기");
 		Integer topSpace = null;
@@ -588,14 +564,6 @@ public class Crossword {
 			topSpace = x-notBlankX-1;
 		}
 		return topSpace;
-	}
-
-	// 정해진 x축만큼 이동
-	private void moveX(List<MatrixWord> matrixWords, Integer moveX) {
-		for(int i=0;i<matrixWords.size();i++) {
-			matrixWords.get(i).setX(matrixWords.get(i).getX()+moveX);
-		}
-		
 	}
 	
 	// y좌표 구하기
@@ -642,9 +610,6 @@ public class Crossword {
 		return x;
 	}
 	
-	
-	
-	
 	// 첫번째 척추 단어 생성
 	private MatrixWord firstSpine(String word, Integer firstX, Integer firstY) {
 		MatrixWord firstSpineWord = new MatrixWord();
@@ -653,7 +618,6 @@ public class Crossword {
 			firstX = Math.round((float)SIZE/2);
 			firstY = Math.round((float)(SIZE-word.length())/2);
 		}
-		
 		
 		firstSpineWord.setWord(word);
 		firstSpineWord.setAcross(across);

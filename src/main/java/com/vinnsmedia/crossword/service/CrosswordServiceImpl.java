@@ -156,7 +156,7 @@ public class CrosswordServiceImpl implements CrosswordService{
 		// 실험
 		Character[][] matrix = (Character[][]) puzzle.get("matrix");
 		if(matrix != null) {
-			System.out.println(">>>>>>>>>>>퍼즐<<<<<<<<<<<");
+			System.out.println(">>>>>>>>>>>"+crossword.getTitle()+"<<<<<<<<<<<");
 			for(int i=0;i<matrix.length;i++) {
 				for(int j=0;j<matrix[i].length;j++) {
 					if(matrix[i][j] != null) {
